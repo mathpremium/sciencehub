@@ -1,89 +1,49 @@
-class QuizPlatform {
-    constructor() {
-        this.setupEventListeners();
-        this.showPopupWithDelay();
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    const biology = document.getElementById('biology');
+    const biologyDropdown = document.getElementById('biologyDropdown');
+    const dropdownContent = document.querySelector('.dropdown-content');
+    const lockedSubjects = document.querySelectorAll('.subject-card.locked');
+    const overlay = document.getElementById('overlay');
+    const popup = document.getElementById('telegramPopup');
+    const closePopup = document.getElementById('closePopup');
 
-    setupEventListeners() {
-        const biologyCard = document.getElementById('biology');
-        const biologyMenu = document.getElementById('biologyMenu');
-        
-        biologyCard.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-            const { clientX: mouseX, clientY: mouseY } = e;
-            biologyMenu.style.display = 'block';
-            biologyMenu.style.left = `${mouseX}px`;
-            biologyMenu.style.top = `${mouseY}px`;
-        });
-
-        document.addEventListener('click', () => {
-            biologyMenu.style.display = 'none';
-        });
-
-        const lockedSubjects = document.querySelectorAll('.subject-card.locked');
-        lockedSubjects.forEach(subject => {
-            subject.addEventListener('click', () => {
-                this.showUpgradeAlert();
-            });
-        });
-
-        const closePopup = document.querySelector('.close-popup');
-        const overlay = document.getElementById('overlay');
-        
-        closePopup.addEventListener('click', () => {
-            this.hidePopup();
-        });
-
-        overlay.addEventListener('click', () => {
-            this.hidePopup();
-        });
-    }
-
-    showUpgradeAlert() {
-        const alert = document.createElement('div');
-        alert.style.position = 'fixed';
-        alert.style.top = '20px';
-        alert.style.left = '50%';
-        alert.style.transform = 'translateX(-50%)';
-        alert.style.background = '#e74c3c';
-        alert.style.color = 'white';
-        alert.style.padding = '1rem 2rem';
-        alert.style.borderRadius = '5px';
-        alert.style.zIndex = '1000';
-        alert.textContent = '🔒 Upgrade to PRO to unlock this subject!';
-        
-        document.body.appendChild(alert);
-        
-        setTimeout(() => {
-            alert.remove();
-        }, 3000);
-    }
-
-    showPopupWithDelay() {
-        setTimeout(() => {
-            const popup = document.getElementById('telegramPopup');
-            const overlay = document.getElementById('overlay');
-            popup.style.display = 'block';
-            overlay.style.display = 'block';
-        }, 3000);
-    }
-
-    hidePopup() {
-        const popup = document.getElementById('telegramPopup');
-        const overlay = document.getElementById('overlay');
-        popup.style.display = 'none';
-        overlay.style.display = 'none';
-    }
-}
-
-const quizPlatform = new QuizPlatform();
-
-document.querySelectorAll('.subject-card').forEach(card => {
-    card.addEventListener('mouseover', function() {
-        this.style.transform = 'scale(1.02) translateY(-5px)';
+    // Show biology dropdown
+    biology.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        const rect = biology.getBoundingClientRect();
+        biologyDropdown.style.position = 'absolute';
+        biologyDropdown.style.top = `${rect.bottom + window.scrollY}px`;
+        biologyDropdown.style.left = `${rect.left}px`;
     });
 
-    card.addEventListener('mouseout', function() {
-        this.style.transform = 'none';
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', () => {
+        dropdownContent.style.display = 'none';
+    });
+
+    // Show upgrade message for locked subjects
+    lockedSubjects.forEach(subject => {
+        subject.addEventListener('click', () => {
+            alert('🔒 Upgrade to PRO to unlock this subject!');
+        });
+    });
+
+    // Show Telegram popup after 3 seconds
+    setTimeout(() => {
+        overlay.style.display = 'block';
+        popup.style.display = 'block';
+    }, 3000);
+
+    // Close popup
+    closePopup.addEventListener('click', () => {
+        overlay.style.display = 'none';
+        popup.style.display = 'none';
+    });
+
+    // Close popup when clicking overlay
+    overlay.addEventListener('click', () => {
+        overlay.style.display = 'none';
+        popup.style.display = 'none';
     });
 });
