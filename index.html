@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainzHub Science Quiz Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="premium-buttons">
+            <a href="https://t.me/brainzhubscience" class="btn btn-pro">UPGRADE TO PRO</a>
+            <a href="https://t.me/brainzhubscience" class="btn btn-donate">PLEASE DONATE HERE</a>
+        </div>
+    </header>
+
+    <div class="subjects-grid">
+        <div class="subject-card" id="biology">
+            <h2>Biology</h2>
+            <p>Test your knowledge in various biology topics</p>
+        </div>
+        <div class="subject-card locked" id="physics">
+            <h2>Physics</h2>
+            <p>Advanced physics quiz questions</p>
+        </div>
+        <div class="subject-card locked" id="chemistry">
+            <h2>Chemistry</h2>
+            <p>Comprehensive chemistry practice</p>
+        </div>
+    </div>
+
+    <div class="context-menu" id="biologyMenu">
+        <a href="https://t.me/brainzhubscience">Cell Biology</a>
+        <a href="https://t.me/brainzhubscience">Genetics and Evolution</a>
+        <a href="https://t.me/brainzhubscience">Human Biology</a>
+        <a href="https://t.me/brainzhubscience">Plant Biology</a>
+        <a href="https://t.me/brainzhubscience">Ecology and Environment</a>
+        <a href="https://t.me/brainzhubscience">Microbiology</a>
+        <a href="https://t.me/brainzhubscience">Biotechnology</a>
+        <a href="https://t.me/brainzhubscience">Reproduction</a>
+        <a href="https://t.me/brainzhubscience">Physiology and Metabolism</a>
+    </div>
+
+    <div class="popup" id="telegramPopup">
+        <span class="close-popup">&times;</span>
+        <div class="popup-content">
+            <img src="/api/placeholder/60/60" alt="Telegram Logo">
+            <h2>Join Our Telegram Channel!</h2>
+            <p>Get access to exclusive educational resources and join our growing community!</p>
+            <p class="urgent">⚠️ WARNING: Channel closing soon! Limited spots available!</p>
+            <a href="https://t.me/brainzhubscience" class="btn btn-pro" style="margin-top: 1rem;">Join Now</a>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
